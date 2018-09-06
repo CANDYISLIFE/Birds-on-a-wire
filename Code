@@ -1,1 +1,9 @@
-
+Birds = int(input("How many birds?"))
+from random import seed
+from random import random
+# seed random number generator
+seed(1)
+# generate random numbers between 0-1
+for _ in range(Birds):
+	value = random()
+	print(value)
