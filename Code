@@ -3,13 +3,55 @@ from random import random
 
 Birds = int(input("How many birds? "))
 birdLocation = []
+birdDirection = [2]
 
+#right is 2, left is 1
 # seed random number generator
-seed(1)
+seed(4)
 # generate random numbers between 0-1
-for _ in range(Birds):
+for i in range(Birds):
 	value = random()
 	birdLocation.append(value)
-	print(value)
+	#print(value)
 	
+birdLocation.sort()
+print(birdLocation)
 
+
+for i in range(len(birdLocation)):
+    i+=1
+    if i < len(birdLocation)-1:
+        if (birdLocation[i]-birdLocation[i-1]) < (birdLocation[i+1]-birdLocation[i]):
+            birdDirection.append(1)
+        else:
+            birdDirection.append(2)
+        
+
+birdDirection.append(1)
+
+print(birdDirection)
+
+notSeen = [] #0 = seen, 1 = not seen
+
+for i in range(len(birdDirection)):
+    if i == 0:
+        if birdDirection[1] == 1:
+            notSeen.append(0)
+        else:
+            notSeen.append(1)
+            
+#code breaks with low number of birds        
+    elif i == len(birdDirection)-1:
+        if birdDirection[i-1] == 2:
+            notSeen.append(0)
+        else:
+            notSeen.append(1)
+    else:
+        if birdDirection[i-1] == 1 and birdDirection[i+1] == 2:
+            notSeen.append(1)
+        else:
+            notSeen.append(0)
+    i+=1
+    
+print(notSeen)
+print("Number of birds not seen = " + str(sum(notSeen)))
